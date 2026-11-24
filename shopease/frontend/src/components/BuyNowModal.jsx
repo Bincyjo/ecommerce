@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { orderService } from '../services/orderService';
 import { useToast } from '../context/ToastContext';
+import { formatINR } from '../utils/formatCurrency';
 
 export const BuyNowModal = ({ product, isOpen, onClose, onOrderSuccess }) => {
   if (!isOpen || !product) return null;
@@ -133,7 +134,7 @@ export const BuyNowModal = ({ product, isOpen, onClose, onOrderSuccess }) => {
                   {product.name}
                 </h4>
                 <p className="text-sm font-bold text-slate-800 mt-0.5">
-                  ${unitPrice.toFixed(2)} <span className="text-xs font-normal text-slate-400">each</span>
+                  {formatINR(unitPrice)} <span className="text-xs font-normal text-slate-400">each</span>
                 </p>
                 <p className="text-[11px] text-slate-500 mt-1">
                   Available in stock: <span className="font-semibold text-slate-700">{product.stock}</span>
@@ -175,7 +176,7 @@ export const BuyNowModal = ({ product, isOpen, onClose, onOrderSuccess }) => {
             <div className="p-4 bg-slate-50/80 rounded-2xl border border-slate-100 space-y-2 text-sm">
               <div className="flex justify-between text-slate-500">
                 <span>Unit Price</span>
-                <span>${unitPrice.toFixed(2)}</span>
+                <span>{formatINR(unitPrice)}</span>
               </div>
               <div className="flex justify-between text-slate-500">
                 <span>Quantity</span>
@@ -183,7 +184,7 @@ export const BuyNowModal = ({ product, isOpen, onClose, onOrderSuccess }) => {
               </div>
               <div className="pt-2 border-t border-slate-200 flex justify-between font-bold text-slate-900 text-base">
                 <span>Total Amount</span>
-                <span className="text-indigo-600">${calculatedSubtotal}</span>
+                <span className="text-indigo-600">{formatINR(calculatedSubtotal)}</span>
               </div>
               <div className="flex items-center gap-1.5 text-[11px] text-slate-400 pt-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />

@@ -103,61 +103,61 @@ class Command(BaseCommand):
             cat_objs[cname] = cat
         self.stdout.write(self.style.SUCCESS(f"Seeded {len(cat_objs)} categories."))
 
-        # 4. Products
+        # 4. Products with realistic INR pricing
         products_data = [
             {
                 'name': 'Air Zoom Pegasus Pulse',
                 'category': cat_objs['Running Shoes'],
-                'price': Decimal('129.99'),
+                'price': Decimal('9999.00'),
                 'stock': 24,
                 'img': ('pegasus.jpg', (241, 245, 249), (37, 99, 235))
             },
             {
                 'name': 'CloudStrider Carbon Max',
                 'category': cat_objs['Running Shoes'],
-                'price': Decimal('189.50'),
+                'price': Decimal('14499.00'),
                 'stock': 12,
                 'img': ('carbon_max.jpg', (238, 242, 255), (99, 102, 241))
             },
             {
                 'name': 'Urban Retro Low Pro',
                 'category': cat_objs['Casual Sneakers'],
-                'price': Decimal('89.99'),
+                'price': Decimal('6499.00'),
                 'stock': 35,
                 'img': ('retro_low.jpg', (243, 244, 246), (16, 185, 129))
             },
             {
                 'name': 'StreetVibe Canvas White',
                 'category': cat_objs['Casual Sneakers'],
-                'price': Decimal('64.95'),
+                'price': Decimal('4499.00'),
                 'stock': 18,
                 'img': ('canvas_white.jpg', (254, 242, 242), (239, 68, 68))
             },
             {
                 'name': 'Court Dominator Elite',
                 'category': cat_objs['Basketball & Court'],
-                'price': Decimal('149.00'),
+                'price': Decimal('11999.00'),
                 'stock': 15,
                 'img': ('court_dom.jpg', (254, 249, 195), (202, 138, 4))
             },
             {
                 'name': 'Hoop Glide Hyper Dunk',
                 'category': cat_objs['Basketball & Court'],
-                'price': Decimal('135.00'),
+                'price': Decimal('9499.00'),
                 'stock': 8,
                 'img': ('hyper_dunk.jpg', (245, 243, 255), (147, 51, 234))
             },
             {
                 'name': 'Oxford Classic Leather',
                 'category': cat_objs['Formal & Dress'],
-                'price': Decimal('119.99'),
+                'price': Decimal('8999.00'),
                 'stock': 20,
                 'img': ('oxford_classic.jpg', (250, 250, 250), (71, 85, 105))
             },
             {
                 'name': 'Apex Peak Waterproof Boot',
                 'category': cat_objs['Trail & Outdoor'],
-                'price': Decimal('159.95'),
+                'price': Decimal('12499.00'),
                 'stock': 10,
                 'img': ('apex_peak.jpg', (236, 253, 245), (5, 150, 105))
             },

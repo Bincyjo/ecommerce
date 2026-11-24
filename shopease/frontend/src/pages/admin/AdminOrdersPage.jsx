@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { orderService } from '../../services/orderService';
 import { useToast } from '../../context/ToastContext';
+import { formatINR } from '../../utils/formatCurrency';
 
 export const AdminOrdersPage = () => {
   const [orders, setOrders] = useState([]);
@@ -200,7 +201,7 @@ export const AdminOrdersPage = () => {
                   <div>
                     <span className="block text-slate-400 font-medium">TOTAL AMOUNT</span>
                     <span className="text-base font-extrabold text-indigo-600 font-mono">
-                      ${parseFloat(ord.total_amount).toFixed(2)}
+                      {formatINR(ord.total_amount)}
                     </span>
                   </div>
                 </div>
@@ -260,7 +261,7 @@ export const AdminOrdersPage = () => {
                             {item.product_name}
                           </h4>
                           <span className="text-xs text-slate-500">
-                            Quantity: <strong className="text-slate-800">{item.quantity}</strong> &times; Unit Price: <strong className="text-slate-800">${parseFloat(item.price).toFixed(2)}</strong>
+                            Quantity: <strong className="text-slate-800">{item.quantity}</strong> &times; Unit Price: <strong className="text-slate-800">{formatINR(item.price)}</strong>
                           </span>
                         </div>
                       </div>
@@ -268,7 +269,7 @@ export const AdminOrdersPage = () => {
                       <div className="text-right shrink-0">
                         <span className="text-xs text-slate-400 block">Item Subtotal</span>
                         <span className="text-sm font-bold text-slate-900 font-mono">
-                          ${(parseFloat(item.price) * item.quantity).toFixed(2)}
+                          {formatINR(parseFloat(item.price) * item.quantity)}
                         </span>
                       </div>
                     </div>

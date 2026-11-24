@@ -19,7 +19,7 @@ class Order(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"Order #{self.id} by {self.user.username} (${self.total_amount}) - {self.status}"
+        return f"Order #{self.id} by {self.user.username} (₹{self.total_amount}) - {self.status}"
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
@@ -31,4 +31,4 @@ class OrderItem(models.Model):
         return self.price * self.quantity
 
     def __str__(self):
-        return f"{self.quantity}x {self.product.name} @ ${self.price}"
+        return f"{self.quantity}x {self.product.name} @ ₹{self.price}"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShoppingCart, Check, AlertTriangle, Layers } from 'lucide-react';
+import { formatINR } from '../utils/formatCurrency';
 
 export const ProductCard = ({ product, onBuyNow }) => {
   const isOutOfStock = product.stock <= 0;
@@ -54,7 +55,7 @@ export const ProductCard = ({ product, onBuyNow }) => {
             <div>
               <span className="text-xs text-slate-400 block font-medium">Price</span>
               <span className="text-xl font-bold text-slate-900 tracking-tight">
-                ${parseFloat(product.price).toFixed(2)}
+                {formatINR(product.price)}
               </span>
             </div>
 

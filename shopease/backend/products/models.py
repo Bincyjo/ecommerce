@@ -22,4 +22,4 @@ class Product(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.name} - ${self.price} ({self.stock} in stock)"
+        return f"{self.name} - ₹{self.price} ({self.stock} in stock)"

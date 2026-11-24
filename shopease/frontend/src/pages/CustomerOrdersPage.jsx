@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Package, Calendar, Clock, ShoppingBag, ArrowRight, Layers, CheckCircle2 } from 'lucide-react';
 import { orderService } from '../services/orderService';
 import { useAuth } from '../context/AuthContext';
+import { formatINR } from '../utils/formatCurrency';
 
 export const CustomerOrdersPage = () => {
   const { user } = useAuth();
@@ -115,7 +116,7 @@ export const CustomerOrdersPage = () => {
                   </div>
                   <div>
                     <span className="block text-slate-400 font-medium">TOTAL AMOUNT</span>
-                    <span className="text-sm font-bold text-indigo-600">${parseFloat(order.total_amount).toFixed(2)}</span>
+                    <span className="text-sm font-bold text-indigo-600">{formatINR(order.total_amount)}</span>
                   </div>
                 </div>
 
@@ -159,7 +160,7 @@ export const CustomerOrdersPage = () => {
                           {item.product_name}
                         </h4>
                         <p className="text-xs text-slate-500 mt-0.5">
-                          Quantity: <strong className="text-slate-700">{item.quantity}</strong> &times; Unit Price: <strong className="text-slate-700">${parseFloat(item.price).toFixed(2)}</strong> (Historical Snapshot)
+                          Quantity: <strong className="text-slate-700">{item.quantity}</strong> &times; Unit Price: <strong className="text-slate-700">{formatINR(item.price)}</strong> (Historical Snapshot)
                         </p>
                       </div>
                     </div>
@@ -167,7 +168,7 @@ export const CustomerOrdersPage = () => {
                     <div className="text-right shrink-0">
                       <span className="text-xs text-slate-400 block font-medium">Subtotal</span>
                       <span className="text-sm font-bold text-slate-800 font-mono">
-                        ${(parseFloat(item.price) * item.quantity).toFixed(2)}
+                        {formatINR(parseFloat(item.price) * item.quantity)}
                       </span>
                     </div>
                   </div>

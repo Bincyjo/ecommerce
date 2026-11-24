@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckCircle, Package, ArrowRight, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { formatINR } from '../utils/formatCurrency';
 
 export const OrderSuccessModal = ({ order, isOpen, onClose }) => {
   if (!isOpen || !order) return null;
@@ -45,7 +46,7 @@ export const OrderSuccessModal = ({ order, isOpen, onClose }) => {
             <div className="flex justify-between items-center text-sm">
               <span className="text-slate-500">Total Paid</span>
               <span className="font-bold text-indigo-600 text-base">
-                ${parseFloat(order.total_amount).toFixed(2)}
+                {formatINR(order.total_amount)}
               </span>
             </div>
 
@@ -56,7 +57,7 @@ export const OrderSuccessModal = ({ order, isOpen, onClose }) => {
                 {order.items.map((item, idx) => (
                   <div key={idx} className="flex justify-between text-xs text-slate-700">
                     <span className="truncate max-w-[200px]">{item.product_name}</span>
-                    <span>{item.quantity} × ${parseFloat(item.price).toFixed(2)}</span>
+                    <span>{item.quantity} × {formatINR(item.price)}</span>
                   </div>
                 ))}
               </div>

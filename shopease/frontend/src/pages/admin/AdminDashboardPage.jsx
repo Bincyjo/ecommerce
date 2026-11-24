@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { orderService } from '../../services/orderService';
 import { useToast } from '../../context/ToastContext';
+import { formatINR } from '../../utils/formatCurrency';
 
 export const AdminDashboardPage = () => {
   const [stats, setStats] = useState(null);
@@ -207,7 +208,7 @@ export const AdminDashboardPage = () => {
             CUMULATIVE GROSS REVENUE
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-1">
-            ${parseFloat(stats?.total_revenue || 0).toFixed(2)}
+            {formatINR(stats?.total_revenue || 0)}
           </h2>
           <p className="text-xs text-slate-300 mt-2">
             Aggregated sum of all historical customer orders calculated directly through server-side snapshots.
@@ -273,7 +274,7 @@ export const AdminDashboardPage = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4 font-bold text-slate-800">
-                      ${parseFloat(ord.total_amount).toFixed(2)}
+                      {formatINR(ord.total_amount)}
                     </td>
                     <td className="px-6 py-4">
                       <span

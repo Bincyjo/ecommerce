@@ -16,6 +16,7 @@ import { productService } from '../../services/productService';
 import { categoryService } from '../../services/categoryService';
 import { ConfirmationModal } from '../../components/ConfirmationModal';
 import { useToast } from '../../context/ToastContext';
+import { formatINR } from '../../utils/formatCurrency';
 
 export const AdminProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -119,7 +120,7 @@ export const AdminProductsPage = () => {
       return;
     }
     if (parseFloat(formData.price) <= 0 || isNaN(formData.price)) {
-      setModalError('Please enter a valid price greater than $0.00.');
+      setModalError('Please enter a valid price greater than ₹0.00.');
       return;
     }
     if (parseInt(formData.stock) < 0 || isNaN(formData.stock)) {
@@ -301,7 +302,7 @@ export const AdminProductsPage = () => {
                     </td>
 
                     <td className="px-6 py-4 font-bold text-slate-900">
-                      ${parseFloat(prod.price).toFixed(2)}
+                      {formatINR(prod.price)}
                     </td>
 
                     <td className="px-6 py-4">
@@ -407,14 +408,14 @@ export const AdminProductsPage = () => {
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Price ($ USD) *
+                      Price (₹ INR) *
                     </label>
                     <input
                       type="number"
                       step="0.01"
                       min="0.01"
                       required
-                      placeholder="129.99"
+                      placeholder="4999.00"
                       value={formData.price}
                       onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                       className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
