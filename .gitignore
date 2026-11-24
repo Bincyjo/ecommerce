@@ -1,0 +1,12 @@
+venv/
+shopease/backend/venv/
+node_modules/
+shopease/frontend/node_modules/
+.env
+shopease/backend/.env
+shopease/frontend/.env
+*.sqlite3
+__pycache__/
+*.pyc
+media/
+dist/
