@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { ShoppingBag, Lock, User, ArrowRight, AlertCircle, Shield, Eye, EyeOff } from 'lucide-react';
+import { ShoppingBag, Lock, User, ArrowRight, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 
@@ -46,7 +46,7 @@ export const LoginPage = () => {
         err.response?.data?.detail ||
         err.response?.data?.non_field_errors?.[0] ||
         err.response?.data?.error ||
-        "Invalid credentials. Please use 'admin' / 'admin123' or 'customer' / 'customer123'.";
+        "Invalid username or password. Please check your credentials and try again.";
       setError(typeof msg === 'string' ? msg : JSON.stringify(msg));
     } finally {
       setLoading(false);
@@ -56,15 +56,6 @@ export const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     performLogin(username, password);
-  };
-
-  const handleInstantDemoLogin = async (role) => {
-    setError('');
-    const u = role === 'admin' ? 'admin' : 'customer';
-    const p = role === 'admin' ? 'admin123' : 'customer123';
-    setUsername(u);
-    setPassword(p);
-    await performLogin(u, p);
   };
 
   return (
@@ -87,40 +78,6 @@ export const LoginPage = () => {
           <p className="mt-1 text-xs text-slate-500">
             Access your orders, saved addresses, and profile
           </p>
-        </div>
-
-        {/* Demo Quick Fills with Instant 1-Click Login */}
-        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-2.5">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block text-center">
-            Instant 1-Click Demo Logins
-          </span>
-          <div className="grid grid-cols-2 gap-2.5">
-            <button
-              type="button"
-              onClick={() => handleInstantDemoLogin('customer')}
-              disabled={loading}
-              className="py-2.5 px-3 text-xs font-semibold rounded-xl bg-white hover:bg-emerald-50 text-emerald-800 border border-slate-200 hover:border-emerald-300 shadow-xs transition-all flex flex-col items-center justify-center gap-1 active:scale-95 disabled:opacity-50"
-            >
-              <div className="flex items-center gap-1.5 font-bold">
-                <User className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Customer</span>
-              </div>
-              <span className="text-[10px] text-slate-400 font-mono">customer / customer123</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleInstantDemoLogin('admin')}
-              disabled={loading}
-              className="py-2.5 px-3 text-xs font-semibold rounded-xl bg-white hover:bg-amber-50 text-amber-800 border border-slate-200 hover:border-amber-300 shadow-xs transition-all flex flex-col items-center justify-center gap-1 active:scale-95 disabled:opacity-50"
-            >
-              <div className="flex items-center gap-1.5 font-bold">
-                <Shield className="w-3.5 h-3.5 text-amber-600" />
-                <span>Administrator</span>
-              </div>
-              <span className="text-[10px] text-slate-400 font-mono">admin / admin123</span>
-            </button>
-          </div>
         </div>
 
         {/* Error Alert */}
