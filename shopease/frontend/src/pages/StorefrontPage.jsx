@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { 
   Search, 
   SlidersHorizontal, 
@@ -19,13 +20,25 @@ import { BuyNowModal } from '../components/BuyNowModal';
 import { OrderSuccessModal } from '../components/OrderSuccessModal';
 
 export const StorefrontPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlCategory = searchParams.get('category');
+
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(urlCategory ? parseInt(urlCategory, 10) : null);
   const [searchQuery, setSearchQuery] = useState('');
   const [ordering, setOrdering] = useState('-created_at');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Sync category param from URL
+  useEffect(() => {
+    if (urlCategory) {
+      setSelectedCategory(parseInt(urlCategory, 10));
+    } else {
+      setSelectedCategory(null);
+    }
+  }, [urlCategory]);
 
   // Modals state
   const [selectedProduct, setSelectedProduct] = useState(null);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   ShoppingBag, 
@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
+import { categoryService } from '../services/categoryService';
 
 export const Navbar = () => {
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
@@ -21,6 +22,11 @@ export const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    categoryService.getCategories().then(setCategories).catch(() => {});
+  }, []);
 
   const handleLogout = async () => {
     await logout();
@@ -51,35 +57,22 @@ export const Navbar = () => {
               <Link
                 to="/"
                 className={`transition-colors hover:text-[#0084d6] ${
-                  isActive('/') ? 'text-[#0084d6] font-bold' : ''
+                  isActive('/') && !location.search ? 'text-[#0084d6] font-bold' : ''
                 }`}
               >
                 Everything
               </Link>
-              <a
-                href="#products-section"
-                className="transition-colors hover:text-[#0084d6]"
-              >
-                Running
-              </a>
-              <a
-                href="#products-section"
-                className="transition-colors hover:text-[#0084d6]"
-              >
-                Sneakers
-              </a>
-              <a
-                href="#products-section"
-                className="transition-colors hover:text-[#0084d6]"
-              >
-                Casual
-              </a>
-              <a
-                href="#products-section"
-                className="transition-colors hover:text-[#0084d6]"
-              >
-                Formal
-              </a>
+              {categories.slice(0, 5).map((cat) => (
+                <Link
+                  key={cat.id}
+                  to={`/?category=${cat.id}`}
+                  className={`transition-colors hover:text-[#0084d6] ${
+                    location.search === `?category=${cat.id}` ? 'text-[#0084d6] font-bold' : ''
+                  }`}
+                >
+                  {cat.name}
+                </Link>
+              ))}
             </nav>
           </div>
 
@@ -236,20 +229,16 @@ export const Navbar = () => {
           >
             Everything
           </Link>
-          <a
-            href="#products-section"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-slate-700 hover:text-[#0084d6]"
-          >
-            Running Shoes
-          </a>
-          <a
-            href="#products-section"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-slate-700 hover:text-[#0084d6]"
-          >
-            Casual Sneakers
-          </a>
+          {categories.map((cat) => (
+            <Link
+              key={cat.id}
+              to={`/?category=${cat.id}`}
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-slate-700 hover:text-[#0084d6]"
+            >
+              {cat.name}
+            </Link>
+          ))}
           {isAuthenticated && !isAdmin && (
             <Link
               to="/orders"
