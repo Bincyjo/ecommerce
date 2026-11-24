@@ -45,7 +45,7 @@ export const OrderSuccessModal = ({ order, isOpen, onClose }) => {
             </div>
             <div className="flex justify-between items-center text-sm">
               <span className="text-slate-500">Total Paid</span>
-              <span className="font-bold text-indigo-600 text-base">
+              <span className="font-bold text-[#0084d6] text-base">
                 {formatINR(order.total_amount)}
               </span>
             </div>
@@ -71,7 +71,7 @@ export const OrderSuccessModal = ({ order, isOpen, onClose }) => {
                 onClose();
                 navigate('/orders');
               }}
-              className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-100 flex items-center justify-center gap-2 transition-all"
+              className="w-full py-2.5 px-4 rounded-xs bg-[#0084d6] hover:bg-[#0073bb] text-white font-bold text-xs uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition-all"
             >
               <Package className="w-4 h-4" />
               View Order in History

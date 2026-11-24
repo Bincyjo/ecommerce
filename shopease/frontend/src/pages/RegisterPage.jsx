@@ -60,15 +60,15 @@ export const RegisterPage = () => {
         {/* Brand Header */}
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 mb-3 group">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-100 group-hover:scale-105 transition-transform">
-              <ShoppingBag className="w-6 h-6" />
-            </div>
+            <span className="text-4xl font-black italic tracking-tighter text-[#0084d6]">
+              DNK
+            </span>
           </Link>
-          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
             Create Customer Account
           </h2>
-          <p className="mt-1 text-sm text-slate-500">
-            Join ShopEase to browse and buy premium footwear
+          <p className="mt-1 text-xs text-slate-500">
+            Join to browse and buy premium footwear
           </p>
         </div>
 
@@ -161,7 +161,7 @@ export const RegisterPage = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-100 hover:shadow-indigo-200 transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50"
+            className="w-full mt-2 py-3 px-4 rounded-xs bg-[#0084d6] hover:bg-[#0073bb] text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -177,7 +177,7 @@ export const RegisterPage = () => {
         {/* Footer Link */}
         <p className="text-center text-xs text-slate-500">
           Already have an account?{' '}
-          <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-700">
+          <Link to="/login" className="font-bold text-[#0084d6] hover:text-[#0073bb]">
             Sign in
           </Link>
         </p>

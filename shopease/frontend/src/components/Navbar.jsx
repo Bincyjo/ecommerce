@@ -9,7 +9,7 @@ import {
   Menu, 
   X, 
   ShieldCheck,
-  ShoppingBag as BagIcon
+  Search
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -31,85 +31,116 @@ export const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-100 group-hover:scale-105 transition-transform">
-              <ShoppingBag className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
+          {/* Left: Brand Logo (DNK Style) + Main Navigation */}
+          <div className="flex items-center gap-8">
+            <Link to="/" className="flex items-center gap-2 group">
+              <span className="text-2xl sm:text-3xl font-black italic tracking-tighter text-[#0084d6] group-hover:text-[#006bb0] transition-colors">
+                DNK
+              </span>
+              <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 border-l border-slate-300 pl-2 hidden sm:inline">
                 ShopEase
               </span>
-              <span className="block text-[10px] uppercase tracking-widest font-semibold text-indigo-600 -mt-1">
-                E-Commerce
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1">
-            <Link
-              to="/"
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                isActive('/') 
-                  ? 'text-indigo-600 bg-indigo-50 font-semibold' 
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-              }`}
-            >
-              Store
             </Link>
 
+            {/* Desktop Navigation Links (DNK Style Uppercase) */}
+            <nav className="hidden lg:flex items-center space-x-6 text-[13px] font-semibold tracking-wider uppercase text-slate-700">
+              <Link
+                to="/"
+                className={`transition-colors hover:text-[#0084d6] ${
+                  isActive('/') ? 'text-[#0084d6] font-bold' : ''
+                }`}
+              >
+                Everything
+              </Link>
+              <a
+                href="#products-section"
+                className="transition-colors hover:text-[#0084d6]"
+              >
+                Running
+              </a>
+              <a
+                href="#products-section"
+                className="transition-colors hover:text-[#0084d6]"
+              >
+                Sneakers
+              </a>
+              <a
+                href="#products-section"
+                className="transition-colors hover:text-[#0084d6]"
+              >
+                Casual
+              </a>
+              <a
+                href="#products-section"
+                className="transition-colors hover:text-[#0084d6]"
+              >
+                Formal
+              </a>
+            </nav>
+          </div>
+
+          {/* Right Links & User Controls */}
+          <div className="hidden lg:flex items-center space-x-6">
+            <nav className="flex items-center space-x-5 text-[13px] font-semibold tracking-wider uppercase text-slate-600">
+              <a href="#featured-section" className="hover:text-[#0084d6] transition-colors">
+                About
+              </a>
+              <a href="#footer-section" className="hover:text-[#0084d6] transition-colors">
+                Contact Us
+              </a>
+            </nav>
+
+            {/* Quick Orders Link for customer */}
             {isAuthenticated && !isAdmin && (
               <Link
                 to="/orders"
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                  isActive('/orders')
-                    ? 'text-indigo-600 bg-indigo-50 font-semibold'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                }`}
+                className="text-[13px] font-semibold tracking-wider uppercase text-slate-700 hover:text-[#0084d6] flex items-center gap-1.5 transition-colors"
               >
-                <Package className="w-4 h-4" />
-                My Orders
+                <Package className="w-4 h-4 text-[#0084d6]" />
+                Orders
               </Link>
             )}
 
+            {/* Admin Console Shortcut */}
             {isAdmin && (
               <Link
                 to="/admin"
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                  location.pathname.startsWith('/admin')
-                    ? 'text-indigo-600 bg-indigo-50 font-semibold'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                }`}
+                className="px-3 py-1.5 rounded-sm bg-slate-900 text-white text-xs font-semibold tracking-wider uppercase flex items-center gap-1.5 hover:bg-[#0084d6] transition-colors"
               >
-                <LayoutDashboard className="w-4 h-4" />
-                Admin Dashboard
+                <LayoutDashboard className="w-3.5 h-3.5" />
+                Admin
               </Link>
             )}
-          </nav>
 
-          {/* Right Action / Auth Buttons */}
-          <div className="hidden md:flex items-center gap-3">
+            {/* Cart Icon / Cart Widget */}
+            <a
+              href="#products-section"
+              className="flex items-center gap-1.5 text-slate-800 hover:text-[#0084d6] transition-colors group"
+            >
+              <div className="relative">
+                <ShoppingBag className="w-5 h-5 text-slate-700 group-hover:text-[#0084d6]" />
+                <span className="absolute -top-1.5 -right-2 bg-[#0084d6] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  1
+                </span>
+              </div>
+              <span className="text-xs font-bold font-mono tracking-tight text-slate-700 ml-1">
+                Shop
+              </span>
+            </a>
+
+            {/* Auth Dropdown / Buttons */}
             {isAuthenticated ? (
               <div className="relative">
                 <button
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                  className="flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-slate-200 hover:border-slate-300 bg-white transition-all text-left"
+                  className="flex items-center gap-2 p-1 rounded-full text-slate-700 hover:text-[#0084d6] transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-semibold text-sm">
-                    {user?.username?.[0]?.toUpperCase() || 'U'}
-                  </div>
-                  <div className="text-xs">
-                    <p className="font-semibold text-slate-800 leading-tight">{user?.username}</p>
-                    <span className={`inline-block px-1.5 py-0.2 rounded text-[10px] font-medium uppercase tracking-wide ${
-                      isAdmin ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
-                    }`}>
-                      {user?.role}
-                    </span>
+                  <div className="w-8 h-8 rounded-full bg-[#0084d6]/10 text-[#0084d6] border border-[#0084d6]/30 flex items-center justify-center font-bold text-xs uppercase">
+                    {user?.username?.[0] || 'U'}
                   </div>
                 </button>
 
@@ -119,28 +150,31 @@ export const Navbar = () => {
                       className="fixed inset-0 z-10" 
                       onClick={() => setProfileDropdownOpen(false)}
                     />
-                    <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-xl border border-slate-100 py-1 z-20 animate-fade-in">
+                    <div className="absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-xl border border-slate-100 py-1 z-20 animate-fade-in">
                       <div className="px-4 py-2 border-b border-slate-100">
                         <p className="text-xs text-slate-400">Signed in as</p>
-                        <p className="text-sm font-semibold text-slate-800 truncate">{user?.email}</p>
+                        <p className="text-sm font-semibold text-slate-800 truncate">{user?.username}</p>
+                        <span className="inline-block mt-1 px-1.5 py-0.5 rounded text-[10px] font-bold uppercase bg-slate-100 text-slate-600">
+                          {user?.role}
+                        </span>
                       </div>
 
                       {isAdmin ? (
                         <Link
                           to="/admin"
                           onClick={() => setProfileDropdownOpen(false)}
-                          className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-[#0084d6]"
                         >
-                          <ShieldCheck className="w-4 h-4 text-indigo-600" />
+                          <ShieldCheck className="w-4 h-4 text-[#0084d6]" />
                           Admin Console
                         </Link>
                       ) : (
                         <Link
                           to="/orders"
                           onClick={() => setProfileDropdownOpen(false)}
-                          className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-[#0084d6]"
                         >
-                          <Package className="w-4 h-4 text-indigo-600" />
+                          <Package className="w-4 h-4 text-[#0084d6]" />
                           My Orders
                         </Link>
                       )}
@@ -160,28 +194,31 @@ export const Navbar = () => {
                 )}
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <Link
                   to="/login"
-                  className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                  className="text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-[#0084d6] transition-colors"
                 >
-                  Sign In
+                  Log In
                 </Link>
                 <Link
                   to="/register"
-                  className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm shadow-indigo-200 transition-colors"
+                  className="px-3.5 py-1.5 rounded-sm bg-[#0084d6] hover:bg-[#0073bb] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-xs"
                 >
-                  Get Started
+                  Register
                 </Link>
               </div>
             )}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center">
+          <div className="flex lg:hidden items-center gap-3">
+            <Link to="/login" className="text-xs font-bold uppercase text-slate-700">
+              {isAuthenticated ? user?.username : 'Login'}
+            </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+              className="p-2 text-slate-700 hover:text-[#0084d6]"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -191,19 +228,33 @@ export const Navbar = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
+        <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2 text-sm font-semibold uppercase tracking-wider">
           <Link
             to="/"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
+            className="block py-2 text-[#0084d6]"
           >
-            Store
+            Everything
           </Link>
+          <a
+            href="#products-section"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-slate-700 hover:text-[#0084d6]"
+          >
+            Running Shoes
+          </a>
+          <a
+            href="#products-section"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-slate-700 hover:text-[#0084d6]"
+          >
+            Casual Sneakers
+          </a>
           {isAuthenticated && !isAdmin && (
             <Link
               to="/orders"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
+              className="block py-2 text-slate-700 hover:text-[#0084d6]"
             >
               My Orders
             </Link>
@@ -212,42 +263,35 @@ export const Navbar = () => {
             <Link
               to="/admin"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-md text-base font-medium text-indigo-600 bg-indigo-50"
+              className="block py-2 text-[#0084d6]"
             >
               Admin Dashboard
             </Link>
           )}
-          <div className="pt-3 border-t border-slate-100">
+          <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
             {isAuthenticated ? (
-              <div className="space-y-2">
-                <div className="px-3 py-1">
-                  <p className="text-sm font-semibold text-slate-800">{user?.username}</p>
-                  <p className="text-xs text-slate-400">{user?.email}</p>
-                </div>
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    handleLogout();
-                  }}
-                  className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-rose-600 hover:bg-rose-50"
-                >
-                  <LogOut className="w-4 h-4" />
-                  Sign Out
-                </button>
-              </div>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleLogout();
+                }}
+                className="text-rose-600 text-xs font-bold uppercase"
+              >
+                Sign Out ({user?.username})
+              </button>
             ) : (
-              <div className="flex flex-col gap-2 pt-1">
+              <div className="flex gap-4">
                 <Link
                   to="/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center px-4 py-2 text-sm font-medium text-slate-700 border border-slate-200 rounded-lg"
+                  className="text-xs font-bold uppercase text-slate-700"
                 >
-                  Sign In
+                  Log In
                 </Link>
                 <Link
                   to="/register"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg"
+                  className="text-xs font-bold uppercase text-[#0084d6]"
                 >
                   Register
                 </Link>

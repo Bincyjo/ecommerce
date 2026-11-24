@@ -1,74 +1,112 @@
 import React from 'react';
-import { ShoppingBag, ShieldCheck, Truck, RotateCcw, Clock } from 'lucide-react';
+import { Globe, Award, Tag, ShieldCheck } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer className="bg-slate-900 text-slate-400 mt-20 border-t border-slate-800">
-      {/* Features Banner */}
-      <div className="border-b border-slate-800 bg-slate-950/50 py-8">
+    <footer id="footer-section" className="bg-white border-t border-slate-200 mt-20">
+      
+      {/* 4 Feature Highlights (DNK Style) */}
+      <div className="border-b border-slate-200/80 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left">
-            <div className="flex items-center gap-4 justify-center md:justify-start">
-              <div className="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0">
-                <Truck className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-white">Free Express Shipping</h4>
-                <p className="text-xs text-slate-400">On all footwear orders</p>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center sm:text-left">
+            
+            <div className="flex flex-col items-center sm:items-start space-y-2">
+              <Globe className="w-8 h-8 text-[#0084d6]" />
+              <h4 className="text-base font-bold text-slate-800">Worldwide Shipping</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Prompt and safe door-to-door delivery on all footwear orders.
+              </p>
             </div>
-            <div className="flex items-center gap-4 justify-center md:justify-start">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-white">100% Authentic</h4>
-                <p className="text-xs text-slate-400">Direct from top brands</p>
-              </div>
+
+            <div className="flex flex-col items-center sm:items-start space-y-2">
+              <Award className="w-8 h-8 text-[#0084d6]" />
+              <h4 className="text-base font-bold text-slate-800">Best Quality</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                100% genuine products with manufacturer authenticity guarantee.
+              </p>
             </div>
-            <div className="flex items-center gap-4 justify-center md:justify-start">
-              <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
-                <RotateCcw className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-white">30-Day Easy Returns</h4>
-                <p className="text-xs text-slate-400">Hassle-free exchange policy</p>
-              </div>
+
+            <div className="flex flex-col items-center sm:items-start space-y-2">
+              <Tag className="w-8 h-8 text-[#0084d6]" />
+              <h4 className="text-base font-bold text-slate-800">Best Offers</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Seasonal discounts, flash sales, and unbeatable value pricing.
+              </p>
             </div>
-            <div className="flex items-center gap-4 justify-center md:justify-start">
-              <div className="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center shrink-0">
-                <Clock className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-white">24/7 Dedicated Support</h4>
-                <p className="text-xs text-slate-400">Always here to help you</p>
-              </div>
+
+            <div className="flex flex-col items-center sm:items-start space-y-2">
+              <ShieldCheck className="w-8 h-8 text-[#0084d6]" />
+              <h4 className="text-base font-bold text-slate-800">Secure Payments</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                End-to-end encrypted transactions and protected checkout.
+              </p>
             </div>
+
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
-              <ShoppingBag className="w-4 h-4" />
-            </div>
-            <span className="text-lg font-bold text-white tracking-tight">ShopEase</span>
-            <span className="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full font-mono">v1.0</span>
+      {/* Footer Navigation Columns */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          
+          {/* Brand Info */}
+          <div className="space-y-4">
+            <span className="text-3xl font-black italic tracking-tighter text-[#0084d6]">
+              DNK
+            </span>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              The best look anytime, anywhere. Leading destination for modern runners, streetwear trainers, and casual footwear.
+            </p>
           </div>
 
-          <p className="text-xs text-slate-500 text-center">
-            &copy; {new Date().getFullYear()} ShopEase E-Commerce Inc. All rights reserved. Built with Python, Django, MySQL & React.
+          {/* Quick Links */}
+          <div className="space-y-3">
+            <h5 className="text-sm font-bold uppercase tracking-wider text-slate-800">For Her</h5>
+            <ul className="space-y-2 text-xs text-slate-500 font-medium">
+              <li><a href="#products-section" className="hover:text-[#0084d6] transition-colors">Women Running</a></li>
+              <li><a href="#products-section" className="hover:text-[#0084d6] transition-colors">Classic Sneakers</a></li>
+              <li><a href="#products-section" className="hover:text-[#0084d6] transition-colors">Performance Court</a></li>
+            </ul>
+          </div>
+
+          {/* Men's Links */}
+          <div className="space-y-3">
+            <h5 className="text-sm font-bold uppercase tracking-wider text-slate-800">For Him</h5>
+            <ul className="space-y-2 text-xs text-slate-500 font-medium">
+              <li><a href="#products-section" className="hover:text-[#0084d6] transition-colors">Men Runners</a></li>
+              <li><a href="#products-section" className="hover:text-[#0084d6] transition-colors">Leather Dress Shoes</a></li>
+              <li><a href="#products-section" className="hover:text-[#0084d6] transition-colors">Trail & Outdoor Boots</a></li>
+            </ul>
+          </div>
+
+          {/* Customer Care */}
+          <div className="space-y-3">
+            <h5 className="text-sm font-bold uppercase tracking-wider text-slate-800">Information</h5>
+            <ul className="space-y-2 text-xs text-slate-500 font-medium">
+              <li><span className="hover:text-[#0084d6] transition-colors cursor-pointer">About Us</span></li>
+              <li><span className="hover:text-[#0084d6] transition-colors cursor-pointer">Customer Support</span></li>
+              <li><span className="hover:text-[#0084d6] transition-colors cursor-pointer">Returns & Exchanges</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Copyright Bar */}
+      <div className="border-t border-slate-100 py-6 bg-slate-50/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
+          <p>
+            Copyright &copy; {new Date().getFullYear()} DNK Brandstore. Powered by ShopEase DRF & React.
           </p>
-
-          <div className="flex items-center gap-6 text-xs text-slate-400">
-            <span>Server-side Price Integrity</span>
-            <span>Atomic Stock Control</span>
-            <span>JWT Secured</span>
+          <div className="flex items-center space-x-4 font-mono text-[11px]">
+            <span>INR (₹)</span>
+            <span>&bull;</span>
+            <span>SECURE CHECKOUT</span>
           </div>
         </div>
       </div>
+
     </footer>
   );
 };

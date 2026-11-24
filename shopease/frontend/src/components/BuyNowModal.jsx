@@ -127,7 +127,7 @@ export const BuyNowModal = ({ product, isOpen, onClose, onOrderSuccess }) => {
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-indigo-600">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#0084d6]">
                   {product.category_name || product.category?.name}
                 </span>
                 <h4 className="text-sm font-semibold text-slate-900 truncate">
@@ -184,7 +184,7 @@ export const BuyNowModal = ({ product, isOpen, onClose, onOrderSuccess }) => {
               </div>
               <div className="pt-2 border-t border-slate-200 flex justify-between font-bold text-slate-900 text-base">
                 <span>Total Amount</span>
-                <span className="text-indigo-600">{formatINR(calculatedSubtotal)}</span>
+                <span className="text-[#0084d6]">{formatINR(calculatedSubtotal)}</span>
               </div>
               <div className="flex items-center gap-1.5 text-[11px] text-slate-400 pt-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -207,12 +207,12 @@ export const BuyNowModal = ({ product, isOpen, onClose, onOrderSuccess }) => {
               type="button"
               onClick={handleConfirmOrder}
               disabled={loading || product.stock <= 0}
-              className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold shadow-md shadow-indigo-100 hover:shadow-indigo-200 transition-all flex items-center gap-2 active:scale-95 disabled:opacity-50"
+              className="px-6 py-2.5 rounded-xs bg-[#0084d6] hover:bg-[#0073bb] text-white text-xs font-bold uppercase tracking-wider shadow-sm transition-all flex items-center gap-2 active:scale-95 disabled:opacity-50"
             >
               {loading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Processing Order...</span>
+                  <span>Processing...</span>
                 </>
               ) : (
                 <span>Confirm & Place Order</span>
