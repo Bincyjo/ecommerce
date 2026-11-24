@@ -61,13 +61,13 @@ class Command(BaseCommand):
                 'is_superuser': True,
             }
         )
-        if created or not admin_user.check_password('admin123'):
-            admin_user.set_password('admin123')
+        if created or not admin_user.check_password('123654'):
+            admin_user.set_password('123654')
             admin_user.role = User.ROLE_ADMIN
             admin_user.is_staff = True
             admin_user.is_superuser = True
             admin_user.save()
-            self.stdout.write(self.style.SUCCESS("Created admin user: admin / admin123"))
+            self.stdout.write(self.style.SUCCESS("Created admin user: admin / 123654"))
         else:
             self.stdout.write("Admin user already exists.")
 
