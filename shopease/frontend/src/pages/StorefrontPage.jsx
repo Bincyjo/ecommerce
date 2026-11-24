@@ -116,7 +116,7 @@ export const StorefrontPage = () => {
               25% Off On All Products
             </p>
 
-            {/* Buttons: Solid White and Transparent Outline */}
+            {/* Action Buttons */}
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <a
                 href="#products-section"
@@ -124,118 +124,24 @@ export const StorefrontPage = () => {
               >
                 Shop Now
               </a>
-              <a
-                href="#featured-banners"
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedCategory(null);
+                  setSearchQuery('');
+                  const el = document.getElementById('products-section');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="px-8 py-3.5 bg-transparent border-2 border-white text-white font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all shadow-xs active:scale-95"
               >
-                Find More
-              </a>
+                View Catalog
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. BRAND LOGOS STRIP (DNK Style Monochrome Logos) */}
-      <section className="bg-white border-b border-slate-200/80 py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-8 items-center justify-items-center opacity-70 grayscale hover:grayscale-0 transition-all">
-            <div className="flex items-center gap-1.5 font-bold tracking-tighter text-lg text-slate-800">
-              <span className="w-5 h-5 rounded-full border-2 border-slate-800 flex items-center justify-center text-[10px]">L</span>
-              <span>logoipsum</span>
-            </div>
-            <div className="flex items-center gap-1.5 font-semibold tracking-tight text-lg text-slate-800">
-              <span className="w-4 h-4 bg-slate-800 rounded-xs" />
-              <span>BRANDSTORE</span>
-            </div>
-            <div className="flex items-center gap-1 font-mono tracking-widest text-lg font-black text-slate-800">
-              <span>[LOGO]</span>
-            </div>
-            <div className="flex items-center gap-1.5 font-bold tracking-tighter text-lg text-slate-800">
-              <span className="w-5 h-5 rounded-full border-2 border-slate-800 flex items-center justify-center text-[10px]">C</span>
-              <span>logoispum</span>
-            </div>
-            <div className="flex items-center gap-1.5 font-semibold tracking-tight text-lg text-slate-800">
-              <span className="w-3.5 h-3.5 rotate-45 bg-slate-800" />
-              <span>APPAREL</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. THREE PROMOTIONAL BANNER CARDS (DNK Signature Grid) */}
-      <section id="featured-banners" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          {/* Card 1: Warm Red / Coral Tint */}
-          <div className="relative h-96 overflow-hidden rounded-xs bg-gradient-to-t from-rose-950/90 via-rose-900/60 to-rose-800/40 text-white p-8 flex flex-col justify-end group shadow-md">
-            <div className="absolute inset-0 -z-10 bg-[url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center group-hover:scale-105 transition-transform duration-700" />
-            <div className="space-y-3">
-              <h3 className="text-2xl font-bold tracking-tight text-white">
-                20% Off On Running Shoes
-              </h3>
-              <p className="text-xs text-slate-200 line-clamp-2 leading-relaxed">
-                High-performance engineered soles with lightweight responsive cushioning.
-              </p>
-              <div className="pt-2">
-                <a
-                  href="#products-section"
-                  onClick={() => setSelectedCategory(categories.find(c => c.name.toLowerCase().includes('running'))?.id || null)}
-                  className="inline-block px-6 py-2.5 bg-white text-slate-900 text-xs font-bold uppercase tracking-wider hover:bg-slate-100 transition-all shadow-xs"
-                >
-                  Shop Now
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Cool Ocean / Teal Tint */}
-          <div className="relative h-96 overflow-hidden rounded-xs bg-gradient-to-t from-sky-950/90 via-sky-900/60 to-sky-800/40 text-white p-8 flex flex-col justify-end group shadow-md">
-            <div className="absolute inset-0 -z-10 bg-[url('https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center group-hover:scale-105 transition-transform duration-700" />
-            <div className="space-y-3">
-              <h3 className="text-2xl font-bold tracking-tight text-white">
-                Latest Footwear For You
-              </h3>
-              <p className="text-xs text-slate-200 line-clamp-2 leading-relaxed">
-                Discover retro trainers and iconic streetwear styles tailored for every day.
-              </p>
-              <div className="pt-2">
-                <a
-                  href="#products-section"
-                  onClick={() => setSelectedCategory(categories.find(c => c.name.toLowerCase().includes('casual'))?.id || null)}
-                  className="inline-block px-6 py-2.5 bg-white text-slate-900 text-xs font-bold uppercase tracking-wider hover:bg-slate-100 transition-all shadow-xs"
-                >
-                  Shop Now
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: Deep Plum / Wine Tint */}
-          <div className="relative h-96 overflow-hidden rounded-xs bg-gradient-to-t from-purple-950/90 via-purple-900/60 to-purple-800/40 text-white p-8 flex flex-col justify-end group shadow-md">
-            <div className="absolute inset-0 -z-10 bg-[url('https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center group-hover:scale-105 transition-transform duration-700" />
-            <div className="space-y-3">
-              <h3 className="text-2xl font-bold tracking-tight text-white">
-                Step Up In Style!
-              </h3>
-              <p className="text-xs text-slate-200 line-clamp-2 leading-relaxed">
-                Handcrafted premium leather oxfords and basketball court dominators.
-              </p>
-              <div className="pt-2">
-                <a
-                  href="#products-section"
-                  onClick={() => setSelectedCategory(null)}
-                  className="inline-block px-6 py-2.5 bg-white text-slate-900 text-xs font-bold uppercase tracking-wider hover:bg-slate-100 transition-all shadow-xs"
-                >
-                  Check Out
-                </a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 4. FEATURED PRODUCTS CATALOG */}
+      {/* FEATURED PRODUCTS CATALOG */}
       <section id="products-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
         
         {/* Section Header with Blue Underline */}
