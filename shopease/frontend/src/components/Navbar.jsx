@@ -35,18 +35,18 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Left: Brand Logo (DNK Style) + Main Navigation */}
+          {/* Left: Brand Logo + Main Navigation */}
           <div className="flex items-center gap-8">
-            <Link to="/" className="flex items-center gap-2 group">
-              <span className="text-2xl sm:text-3xl font-black italic tracking-tighter text-[#0084d6] group-hover:text-[#006bb0] transition-colors">
-                DNK
-              </span>
-              <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 border-l border-slate-300 pl-2 hidden sm:inline">
+            <Link to="/" className="flex items-center gap-2.5 group">
+              <div className="w-9 h-9 rounded-xs bg-[#0084d6] flex items-center justify-center text-white shadow-xs group-hover:bg-[#0073bb] transition-colors">
+                <ShoppingBag className="w-5 h-5" />
+              </div>
+              <span className="text-2xl font-black italic tracking-tighter text-[#0084d6] group-hover:text-[#006bb0] transition-colors">
                 ShopEase
               </span>
             </Link>
 
-            {/* Desktop Navigation Links (DNK Style Uppercase) */}
+            {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center space-x-6 text-[13px] font-semibold tracking-wider uppercase text-slate-700">
               <Link
                 to="/"

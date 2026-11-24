@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { ShoppingBag, Lock, User, ArrowRight, AlertCircle, Shield, CheckCircle2 } from 'lucide-react';
+import { ShoppingBag, Lock, User, ArrowRight, AlertCircle, Shield, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 
@@ -12,23 +12,26 @@ export const LoginPage = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const from = location.state?.from?.pathname || '/';
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const performLogin = async (userToSubmit, passToSubmit) => {
     setError('');
 
-    if (!username.trim() || !password) {
+    const u = userToSubmit.trim();
+    const p = passToSubmit.trim();
+
+    if (!u || !p) {
       setError('Please provide your username/email and password.');
       return;
     }
 
     setLoading(true);
     try {
-      const loggedUser = await login(username.trim(), password);
+      const loggedUser = await login(u, p);
       toast.success(`Welcome back, ${loggedUser.username}!`);
 
       // Role-based redirect
@@ -43,33 +46,39 @@ export const LoginPage = () => {
         err.response?.data?.detail ||
         err.response?.data?.non_field_errors?.[0] ||
         err.response?.data?.error ||
-        'Invalid credentials. Please verify your details.';
+        "Invalid credentials. Please use 'admin' / 'admin123' or 'customer' / 'customer123'.";
       setError(typeof msg === 'string' ? msg : JSON.stringify(msg));
     } finally {
       setLoading(false);
     }
   };
 
-  const fillDemo = (role) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    performLogin(username, password);
+  };
+
+  const handleInstantDemoLogin = async (role) => {
     setError('');
-    if (role === 'admin') {
-      setUsername('admin');
-      setPassword('admin123');
-    } else {
-      setUsername('customer');
-      setPassword('customer123');
-    }
+    const u = role === 'admin' ? 'admin' : 'customer';
+    const p = role === 'admin' ? 'admin123' : 'customer123';
+    setUsername(u);
+    setPassword(p);
+    await performLogin(u, p);
   };
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-xl border border-slate-200/80 p-8 sm:p-10 space-y-8 animate-fade-in">
+      <div className="max-w-md w-full bg-white rounded-3xl shadow-xl border border-slate-200/80 p-8 sm:p-10 space-y-6 animate-fade-in">
         
         {/* Brand Header */}
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 mb-3 group">
-            <span className="text-4xl font-black italic tracking-tighter text-[#0084d6]">
-              DNK
+            <div className="w-10 h-10 rounded-xs bg-[#0084d6] flex items-center justify-center text-white shadow-xs">
+              <ShoppingBag className="w-5 h-5" />
+            </div>
+            <span className="text-3xl font-black italic tracking-tighter text-[#0084d6]">
+              ShopEase
             </span>
           </Link>
           <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
@@ -80,27 +89,36 @@ export const LoginPage = () => {
           </p>
         </div>
 
-        {/* Demo Quick Fills */}
-        <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/60 space-y-2">
+        {/* Demo Quick Fills with Instant 1-Click Login */}
+        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-2.5">
           <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block text-center">
-            Instant Demo Logins
+            Instant 1-Click Demo Logins
           </span>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2.5">
             <button
               type="button"
-              onClick={() => fillDemo('customer')}
-              className="py-2 px-3 text-xs font-semibold rounded-xl bg-white hover:bg-emerald-50 text-emerald-700 border border-slate-200 hover:border-emerald-300 shadow-sm transition-all flex items-center justify-center gap-1.5"
+              onClick={() => handleInstantDemoLogin('customer')}
+              disabled={loading}
+              className="py-2.5 px-3 text-xs font-semibold rounded-xl bg-white hover:bg-emerald-50 text-emerald-800 border border-slate-200 hover:border-emerald-300 shadow-xs transition-all flex flex-col items-center justify-center gap-1 active:scale-95 disabled:opacity-50"
             >
-              <User className="w-3.5 h-3.5" />
-              Customer
+              <div className="flex items-center gap-1.5 font-bold">
+                <User className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Customer</span>
+              </div>
+              <span className="text-[10px] text-slate-400 font-mono">customer / customer123</span>
             </button>
+
             <button
               type="button"
-              onClick={() => fillDemo('admin')}
-              className="py-2 px-3 text-xs font-semibold rounded-xl bg-white hover:bg-amber-50 text-amber-700 border border-slate-200 hover:border-amber-300 shadow-sm transition-all flex items-center justify-center gap-1.5"
+              onClick={() => handleInstantDemoLogin('admin')}
+              disabled={loading}
+              className="py-2.5 px-3 text-xs font-semibold rounded-xl bg-white hover:bg-amber-50 text-amber-800 border border-slate-200 hover:border-amber-300 shadow-xs transition-all flex flex-col items-center justify-center gap-1 active:scale-95 disabled:opacity-50"
             >
-              <Shield className="w-3.5 h-3.5" />
-              Administrator
+              <div className="flex items-center gap-1.5 font-bold">
+                <Shield className="w-3.5 h-3.5 text-amber-600" />
+                <span>Administrator</span>
+              </div>
+              <span className="text-[10px] text-slate-400 font-mono">admin / admin123</span>
             </button>
           </div>
         </div>
@@ -109,7 +127,7 @@ export const LoginPage = () => {
         {error && (
           <div className="flex items-start gap-2.5 p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 text-xs font-medium">
             <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
-            <div>{error}</div>
+            <div className="leading-snug">{error}</div>
           </div>
         )}
 
@@ -126,8 +144,8 @@ export const LoginPage = () => {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter username or email"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
+                placeholder="e.g. admin or customer"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0084d6]/20 focus:border-[#0084d6] transition-all"
               />
             </div>
           </div>
@@ -139,13 +157,21 @@ export const LoginPage = () => {
             <div className="relative">
               <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
+                placeholder="e.g. admin123"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0084d6]/20 focus:border-[#0084d6] transition-all"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+                title={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
             </div>
           </div>
 

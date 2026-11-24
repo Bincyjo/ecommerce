@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <footer id="footer-section" className="bg-white border-t border-slate-200 mt-20">
       
-      {/* 4 Feature Highlights (DNK Style) */}
+      {/* 4 Feature Highlights */}
       <div className="border-b border-slate-200/80 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center sm:text-left">
@@ -52,9 +52,14 @@ export const Footer = () => {
           
           {/* Brand Info */}
           <div className="space-y-4">
-            <span className="text-3xl font-black italic tracking-tighter text-[#0084d6]">
-              DNK
-            </span>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-xs bg-[#0084d6] flex items-center justify-center text-white">
+                <Globe className="w-4 h-4" />
+              </div>
+              <span className="text-2xl font-black italic tracking-tighter text-[#0084d6]">
+                ShopEase
+              </span>
+            </div>
             <p className="text-xs text-slate-500 leading-relaxed">
               The best look anytime, anywhere. Leading destination for modern runners, streetwear trainers, and casual footwear.
             </p>
@@ -97,7 +102,7 @@ export const Footer = () => {
       <div className="border-t border-slate-100 py-6 bg-slate-50/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
           <p>
-            Copyright &copy; {new Date().getFullYear()} DNK Brandstore. Powered by ShopEase DRF & React.
+            Copyright &copy; {new Date().getFullYear()} ShopEase. All rights reserved.
           </p>
           <div className="flex items-center space-x-4 font-mono text-[11px]">
             <span>INR (₹)</span>

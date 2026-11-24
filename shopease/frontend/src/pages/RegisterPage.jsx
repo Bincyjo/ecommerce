@@ -60,8 +60,11 @@ export const RegisterPage = () => {
         {/* Brand Header */}
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 mb-3 group">
-            <span className="text-4xl font-black italic tracking-tighter text-[#0084d6]">
-              DNK
+            <div className="w-10 h-10 rounded-xs bg-[#0084d6] flex items-center justify-center text-white shadow-xs">
+              <ShoppingBag className="w-5 h-5" />
+            </div>
+            <span className="text-3xl font-black italic tracking-tighter text-[#0084d6]">
+              ShopEase
             </span>
           </Link>
           <h2 className="text-2xl font-bold text-slate-900 tracking-tight">

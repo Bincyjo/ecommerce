@@ -55,7 +55,7 @@ export const ProductCard = ({ product, onBuyNow }) => {
             {product.name}
           </h3>
 
-          {/* 5-Star Rating (DNK Style) */}
+          {/* 5-Star Rating */}
           <div className="flex items-center gap-0.5 my-2">
             {[...Array(5)].map((_, i) => (
               <Star
@@ -74,7 +74,7 @@ export const ProductCard = ({ product, onBuyNow }) => {
           </div>
         </div>
 
-        {/* Buy Now Button (DNK Clean Style) */}
+        {/* Buy Now Button */}
         <div className="mt-4 pt-3 border-t border-slate-100">
           <button
             onClick={() => onBuyNow(product)}
